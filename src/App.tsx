@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -14,6 +14,15 @@ function App() {
   const [stadium, setStadium] = useState('');
   const [stadiumDirty, setStadiumDirty] = useState(false);
   const [stadiumError, setStadiumError] = useState('Input can not be empty!');
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    if(firstTeamError || secondTeamError || ticketsError || stadiumError) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [firstTeamError, secondTeamError, ticketsError, stadiumError])
 
 
   const teamHandler = (e, setTeam, setDirty, setError) => {
@@ -142,7 +151,11 @@ function App() {
           </select>
           <div className="buttons">
             <button type='reset' className='button' onClick={resetHandler}>Reset</button>
-            <button type='submit' className='button'>Add</button>
+            <button 
+            type='submit' 
+            className='button'
+            disabled={!formValid}
+            >Add</button>
           </div>
         </form>
       </div>
