@@ -162,13 +162,17 @@ function App() {
             <option value="Camp Nou">Camp Nou</option>
           </select>
           <div className="buttons">
-            <button type='reset' className='button' onClick={resetHandler}>Reset</button>
+            <button type='reset' className='buttonReset' onClick={resetHandler}>
+              <span className="button-content">Reset</span>
+            </button>
             <button 
             type='button' 
-            className='button'
+            className='buttonAdd'
             disabled={!formValid}
             onClick={addButtonHandler}
-            >Add</button>
+            >
+              <span className="button-content">Add</span>
+            </button>
           </div>
         </form>
       </div>
@@ -180,7 +184,9 @@ function App() {
                 <label>Second Team is '{block.secondTeam}'</label>
                 <label>Number of tickets - '{block.tickets}'</label>
                 <label>Field - '{block.stadium}'</label>
-                <button onClick={() => removeBlock(block.id)} className='deleteCardButton'>Delete</button>
+                <button onClick={() => removeBlock(block.id)} className='deleteCardButton'>
+                  <span className="button-content">Delete</span>
+                  </button>
               </div>
             ))}
         </div>}
