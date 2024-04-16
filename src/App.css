@@ -6,6 +6,12 @@
   font-size: 14px;
 }
 
+.page {
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+}
+
 .container {
   padding: 15px 15px 10px;
   border: 2px solid gray;
@@ -41,4 +47,12 @@
 .button {
  height: 25px;
  width: 80px; 
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid gray;
+  border-radius: 15px;
+  width: 400px;
 }

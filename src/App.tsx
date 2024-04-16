@@ -15,6 +15,8 @@ function App() {
   const [stadiumDirty, setStadiumDirty] = useState(false);
   const [stadiumError, setStadiumError] = useState('Input can not be empty!');
   const [formValid, setFormValid] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [blocks, setBlocks] = useState([]);
 
   useEffect(() => {
     if(firstTeamError || secondTeamError || ticketsError || stadiumError) {
@@ -89,6 +91,11 @@ function App() {
     }
   }
 
+  const addButtonHandler = () => {
+    setBlocks([...blocks, { id: Date.now(), firstTeam, secondTeam, tickets, stadium }]);
+    setIsVisible(true);
+  };
+
   const resetHandler = () => {
     setFirstTeam('')
     setFirstTeamError('')
@@ -100,8 +107,13 @@ function App() {
     setStadiumError('')
   }
 
+  const removeBlock = (id) => {
+    setBlocks(blocks.filter((block) => block.id !== id));
+  };
+
   return (
     <>
+    <div className="page">
       <div className="container">
         <h2>Football Match Form</h2>
         <form action="" className='form-container'>
@@ -152,13 +164,27 @@ function App() {
           <div className="buttons">
             <button type='reset' className='button' onClick={resetHandler}>Reset</button>
             <button 
-            type='submit' 
+            type='button' 
             className='button'
             disabled={!formValid}
+            onClick={addButtonHandler}
             >Add</button>
           </div>
         </form>
       </div>
+      {isVisible && 
+        <div className='cardList'>
+          {blocks.map((block, index) => (
+              <div key={index} className="card">
+                <label>First Team is '{block.firstTeam}'</label>
+                <label>Second Team is '{block.secondTeam}'</label>
+                <label>Number of tickets - '{block.tickets}'</label>
+                <label>Field - '{block.stadium}'</label>
+                <button onClick={() => removeBlock(block.id)} className='deleteCardButton'>Delete</button>
+              </div>
+            ))}
+        </div>}
+        </div>
     </>
   )
 }
