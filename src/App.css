@@ -4,6 +4,7 @@
   padding: 2rem;
   text-align: center;
   font-size: 14px;
+  color: #161A30;
 }
 
 .page {
@@ -13,9 +14,12 @@
 }
 
 .container {
-  padding: 15px 15px 10px;
-  border: 2px solid gray;
+  padding: 20px 15px 30px;
+  border: 2px solid #161A30;
   border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 15px #161A30;
+  max-height: 360px;
 }
 
 .form-container {
@@ -44,7 +48,22 @@
   margin-top: 10px;
 }
 
-.deleteCardButton,
+.deleteCardButton {
+  height: 25px;
+ width: 100px; 
+ position: relative;
+  overflow: hidden;
+  padding: 0 2rem;
+  border-radius: 1.5rem;
+  background: #3d3a4e;
+  background-size: 400%;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin: 10px auto 10px;
+}
+
 .buttonReset,
 .buttonAdd {
  height: 25px;
@@ -59,6 +78,7 @@
   border: none;
   cursor: pointer;
   text-align: center;
+  margin: 0 auto;
 }
 
 .buttonAdd:disabled {
@@ -148,10 +168,22 @@
 .card {
   display: flex;
   flex-direction: column;
-  border: 2px solid gray;
+  border: 2px solid #161A30;
   border-radius: 15px;
   width: 400px;
   font-weight: bold;
-  height: 150px;
+  height: 175px;
+  background-color: #fff;
+  box-shadow: 0 0 15px #161A30;
+  margin-top: 5px;
 }
 
+.cardTitle {
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.cardLabel {
+  font-weight: 500;
+  margin: 5px 0 0;
+}
