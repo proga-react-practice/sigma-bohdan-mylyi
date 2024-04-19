@@ -1,4 +1,5 @@
 import React from "react";
+import './styles/CardList.css'
 
 interface Block {
   id: number;
