@@ -1,5 +1,5 @@
 import React from "react";
-import './styles/Form.css';
+import './component styles/Form.css';
 
 interface FormProps {
   teamHandler: (
@@ -68,11 +68,6 @@ const Form: React.FC<FormProps> = ({
   return (
     <form action="" className="form-container">
       <label htmlFor="firstTeam">First Team:</label>
-      {firstTeamDirty && firstTeamError && (
-        <div style={{ color: "red", fontWeight: "bold" }}>
-          {firstTeamError}
-        </div>
-      )}
       <input
         onChange={(e) =>
           teamHandler(
@@ -91,12 +86,12 @@ const Form: React.FC<FormProps> = ({
         placeholder="Enter first team..."
         required
       />
-      <label htmlFor="secondTeam">Second Team:</label>
-      {secondTeamDirty && secondTeamError && (
-        <div style={{ color: "red", fontWeight: "bold" }}>
-          {secondTeamError}
+      {firstTeamDirty && firstTeamError && (
+        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px"}}>
+          {firstTeamError}
         </div>
       )}
+      <label htmlFor="secondTeam">Second Team:</label>
       <input
         onChange={(e) =>
           teamHandler(
@@ -115,12 +110,12 @@ const Form: React.FC<FormProps> = ({
         placeholder="Enter second team..."
         required
       />
-      <label htmlFor="numberOfTickets">Tickets:</label>
-      {ticketsDirty && ticketsError && (
-        <div style={{ color: "red", fontWeight: "bold" }}>
-          {ticketsError}
+       {secondTeamDirty && secondTeamError && (
+        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
+          {secondTeamError}
         </div>
       )}
+      <label htmlFor="numberOfTickets">Tickets:</label>
       <input
         onChange={(e) => ticketsHandler(e)}
         onBlur={(e) => blurHandler(e)}
@@ -132,12 +127,12 @@ const Form: React.FC<FormProps> = ({
         placeholder="Enter the quantity of tickets..."
         required
       />
-      <label htmlFor="stadium">Stadium:</label>
-      {stadiumDirty && stadiumError && (
-        <div style={{ color: "red", fontWeight: "bold" }}>
-          {stadiumError}
+      {ticketsDirty && ticketsError && (
+        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
+          {ticketsError}
         </div>
       )}
+      <label htmlFor="stadium">Stadium:</label>
       <select
         name="stadium"
         id="stadium"
@@ -150,6 +145,11 @@ const Form: React.FC<FormProps> = ({
         <option value="Parc Des Princes">Parc Des Princes</option>
         <option value="Camp Nou">Camp Nou</option>
       </select>
+      {stadiumDirty && stadiumError && (
+        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px",marginBottom: "5px"}}>
+          {stadiumError}
+        </div>
+      )}
       <div className="buttons">
         <button
           type="reset"
