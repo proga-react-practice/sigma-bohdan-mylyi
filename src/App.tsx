@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import Form from "./Form";
 
 interface Block {
   id: number;
@@ -140,108 +141,33 @@ const App: React.FC = () => {
       <div className="page">
         <div className="container">
           <h2>Football Match Form</h2>
-          <form action="" className="form-container">
-            <label htmlFor="firstTeam">First Team:</label>
-            {firstTeamDirty && firstTeamError && (
-              <div style={{ color: "red", fontWeight: "bold" }}>
-                {firstTeamError}
-              </div>
-            )}
-            <input
-              onChange={(e) =>
-                teamHandler(
-                  e,
-                  setFirstTeam,
-                  setFirstTeamDirty,
-                  setFirstTeamError
-                )
-              }
-              onBlur={(e) => blurHandler(e)}
-              value={firstTeam}
-              name="firstTeam"
-              type="text"
-              className="input"
-              id="firstTeam"
-              placeholder="Enter first team..."
-              required
-            />
-            <label htmlFor="secondTeam">Second Team:</label>
-            {secondTeamDirty && secondTeamError && (
-              <div style={{ color: "red", fontWeight: "bold" }}>
-                {secondTeamError}
-              </div>
-            )}
-            <input
-              onChange={(e) =>
-                teamHandler(
-                  e,
-                  setSecondTeam,
-                  setSecondTeamDirty,
-                  setSecondTeamError
-                )
-              }
-              onBlur={(e) => blurHandler(e)}
-              value={secondTeam}
-              name="secondTeam"
-              type="text"
-              className="input"
-              id="secondTeam"
-              placeholder="Enter second team..."
-              required
-            />
-            <label htmlFor="numberOfTickets">Tickets:</label>
-            {ticketsDirty && ticketsError && (
-              <div style={{ color: "red", fontWeight: "bold" }}>
-                {ticketsError}
-              </div>
-            )}
-            <input
-              onChange={(e) => ticketsHandler(e)}
-              onBlur={(e) => blurHandler(e)}
-              value={tickets}
-              name="tickets"
-              type="number"
-              className="input"
-              id="numberOfTickets"
-              placeholder="Enter the quantity of tickets..."
-              required
-            />
-            <label htmlFor="stadium">Stadium:</label>
-            {stadiumDirty && stadiumError && (
-              <div style={{ color: "red", fontWeight: "bold" }}>
-                {stadiumError}
-              </div>
-            )}
-            <select
-              name="stadium"
-              id="stadium"
-              className="input input_select"
-              onChange={(e) => stadiumHandler(e)}
-              onBlur={(e) => blurHandler(e)}
-            >
-              <option disabled>Choose Stadium:</option>
-              <option value="">None</option>
-              <option value="Parc Des Princes">Parc Des Princes</option>
-              <option value="Camp Nou">Camp Nou</option>
-            </select>
-            <div className="buttons">
-              <button
-                type="reset"
-                className="buttonReset"
-                onClick={resetHandler}
-              >
-                <span className="button-content">Reset</span>
-              </button>
-              <button
-                type="button"
-                className="buttonAdd"
-                disabled={!formValid}
-                onClick={addButtonHandler}
-              >
-                <span className="button-content">Add</span>
-              </button>
-            </div>
-          </form>
+          <Form
+            firstTeam={firstTeam}
+            firstTeamDirty={firstTeamDirty}
+            firstTeamError={firstTeamError}
+            secondTeam={secondTeam}
+            secondTeamDirty={secondTeamDirty}
+            secondTeamError={secondTeamError}
+            tickets={tickets}
+            ticketsDirty={ticketsDirty}
+            ticketsError={ticketsError}
+            stadium={stadium}
+            stadiumDirty={stadiumDirty}
+            stadiumError={stadiumError}
+            teamHandler={teamHandler}
+            ticketsHandler={ticketsHandler}
+            stadiumHandler={stadiumHandler}
+            blurHandler={blurHandler}
+            setFirstTeam={setFirstTeam}
+            setFirstTeamDirty={setFirstTeamDirty}
+            setFirstTeamError={setFirstTeamError}
+            setSecondTeam={setSecondTeam}
+            setSecondTeamDirty={setSecondTeamDirty}
+            setSecondTeamError={setSecondTeamError}
+            formValid={formValid}
+            resetHandler={resetHandler}
+            addButtonHandler={addButtonHandler}
+          />
         </div>
         {isVisible && (
           <div className="cardList">
