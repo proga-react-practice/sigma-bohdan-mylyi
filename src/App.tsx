@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./Form";
+import CardList from "./CardList";
 
 interface Block {
   id: number;
@@ -170,26 +171,7 @@ const App: React.FC = () => {
           />
         </div>
         {isVisible && (
-          <div className="cardList">
-            {blocks.map((block, index) => (
-              <div key={index} className="card">
-                <h2 className="cardTitle">Match Info:</h2>
-                <label className="cardLabel">
-                  {block.firstTeam} - {block.secondTeam}
-                </label>
-                <label className="cardLabel">
-                  Number of tickets - "{block.tickets}"
-                </label>
-                <label className="cardLabel">Field - "{block.stadium}"</label>
-                <button
-                  onClick={() => removeBlock(block.id)}
-                  className="deleteCardButton"
-                >
-                  <span className="button-content">Delete</span>
-                </button>
-              </div>
-            ))}
-          </div>
+          <CardList blocks={blocks} removeBlock={removeBlock} />
         )}
       </div>
     </>
