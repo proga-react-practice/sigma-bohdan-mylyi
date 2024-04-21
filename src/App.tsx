@@ -1,3 +1,4 @@
+// App.tsx
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./Form";
@@ -12,109 +13,73 @@ interface Block {
 }
 
 const App: React.FC = () => {
-  const [firstTeam, setFirstTeam] = useState<string>("");
-  const [secondTeam, setSecondTeam] = useState<string>("");
-  const [firstTeamDirty, setFirstTeamDirty] = useState<boolean>(false);
-  const [secondTeamDirty, setSecondTeamDirty] = useState<boolean>(false);
-  const [firstTeamError, setFirstTeamError] = useState<string>(
-    "Input can not be empty!"
-  );
-  const [secondTeamError, setSecondTeamError] = useState<string>(
-    "Input can not be empty!"
-  );
-  const [tickets, setTickets] = useState<string>("");
-  const [ticketsDirty, setTicketsDirty] = useState<boolean>(false);
-  const [ticketsError, setTicketsError] = useState<string>(
-    "Input can not be empty!"
-  );
-  const [stadium, setStadium] = useState<string>("");
-  const [stadiumDirty, setStadiumDirty] = useState<boolean>(false);
-  const [stadiumError, setStadiumError] = useState<string>(
-    "Input can not be empty!"
-  );
-  const [formValid, setFormValid] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [formState, setFormState] = useState({
+    firstTeam: "",
+    secondTeam: "",
+    tickets: "",
+    stadium: "",
+    firstTeamDirty: false,
+    secondTeamDirty: false,
+    ticketsDirty: false,
+    stadiumDirty: false,
+    firstTeamError: "Input can not be empty!",
+    secondTeamError: "Input can not be empty!",
+    ticketsError: "Input can not be empty!",
+    stadiumError: "Input can not be empty!",
+  });
+
+  const [formValid, setFormValid] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [blocks, setBlocks] = useState<Block[]>([]);
 
   useEffect(() => {
+    const {
+      firstTeamError,
+      secondTeamError,
+      ticketsError,
+      stadiumError,
+    } = formState;
     if (firstTeamError || secondTeamError || ticketsError || stadiumError) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [firstTeamError, secondTeamError, ticketsError, stadiumError]);
+  }, [formState]);
 
-  const teamHandler = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setTeam: React.Dispatch<React.SetStateAction<string>>,
-    setDirty: React.Dispatch<React.SetStateAction<boolean>>,
-    setError: React.Dispatch<React.SetStateAction<string>>
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const value = e.target.value;
-    setTeam(value);
-    const invalidChars = /[!@#$%^&*(),.?":{}|<>]/;
-    setDirty(true);
-    if (invalidChars.test(value)) {
-      setError("The name of the team must consist only of letters or numbers!");
-    } else {
-      setError("");
-    }
+    const { name, value } = e.target;
+  if (name === "tickets" && parseInt(value) < 0) {
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+      [`${name}Dirty`]: true,
+      [`${name}Error`]: "Quantity of tickets cannot be negative!",
+    }));
+  } else {
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+      [`${name}Dirty`]: true,
+      [`${name}Error`]: value ? "" : "Input can not be empty!",
+    }));
+  }
   };
 
-  const ticketsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setTickets(value);
-    setTicketsDirty(true);
-    if (parseInt(value) < 0) {
-      setTicketsError("Quantity of tickets can not be negative!");
-    } else {
-      setTicketsError("");
-    }
-  };
-
-  const stadiumHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setStadium(value);
-    setStadiumDirty(true);
-    if (!value) {
-      setStadiumError("Please, choose the stadium!");
-    } else {
-      setStadiumError("");
-    }
-  };
-
-  const blurHandler = (
+  const handleBlur = (
     e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    switch (e.target.name) {
-      case "firstTeam":
-        setFirstTeamDirty(true);
-        if (!firstTeam) {
-          setFirstTeamError("Input can not be empty!");
-        }
-        break;
-      case "secondTeam":
-        setSecondTeamDirty(true);
-        if (!secondTeam) {
-          setSecondTeamError("Input can not be empty!");
-        }
-        break;
-      case "tickets":
-        setTicketsDirty(true);
-        if (!tickets) {
-          setTicketsError("Input can not be empty!");
-        }
-        break;
-      case "stadium":
-        setStadiumDirty(true);
-        if (!stadium) {
-          setStadiumError("Please, choose the stadium!");
-        }
-        break;
-    }
+    const { name, value } = e.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [`${name}Dirty`]: true,
+      [`${name}Error`]: value ? "" : "Input can not be empty!",
+    }));
   };
 
   const addButtonHandler = () => {
+    const { firstTeam, secondTeam, tickets, stadium } = formState;
     setBlocks([
       ...blocks,
       { id: Date.now(), firstTeam, secondTeam, tickets, stadium },
@@ -123,14 +88,20 @@ const App: React.FC = () => {
   };
 
   const resetHandler = () => {
-    setFirstTeam("");
-    setFirstTeamError("");
-    setSecondTeam("");
-    setSecondTeamError("");
-    setTickets("");
-    setTicketsError("");
-    setStadium("");
-    setStadiumError("");
+    setFormState({
+      firstTeam: "",
+      secondTeam: "",
+      tickets: "",
+      stadium: "",
+      firstTeamDirty: false,
+      secondTeamDirty: false,
+      ticketsDirty: false,
+      stadiumDirty: false,
+      firstTeamError: "Input can not be empty!",
+      secondTeamError: "Input can not be empty!",
+      ticketsError: "Input can not be empty!",
+      stadiumError: "Input can not be empty!",
+    });
   };
 
   const removeBlock = (id: number) => {
@@ -143,36 +114,15 @@ const App: React.FC = () => {
         <div className="container">
           <h2>Football Match Form</h2>
           <Form
-            firstTeam={firstTeam}
-            firstTeamDirty={firstTeamDirty}
-            firstTeamError={firstTeamError}
-            secondTeam={secondTeam}
-            secondTeamDirty={secondTeamDirty}
-            secondTeamError={secondTeamError}
-            tickets={tickets}
-            ticketsDirty={ticketsDirty}
-            ticketsError={ticketsError}
-            stadium={stadium}
-            stadiumDirty={stadiumDirty}
-            stadiumError={stadiumError}
-            teamHandler={teamHandler}
-            ticketsHandler={ticketsHandler}
-            stadiumHandler={stadiumHandler}
-            blurHandler={blurHandler}
-            setFirstTeam={setFirstTeam}
-            setFirstTeamDirty={setFirstTeamDirty}
-            setFirstTeamError={setFirstTeamError}
-            setSecondTeam={setSecondTeam}
-            setSecondTeamDirty={setSecondTeamDirty}
-            setSecondTeamError={setSecondTeamError}
+            formState={formState}
+            handleInputChange={handleInputChange}
+            handleBlur={handleBlur}
             formValid={formValid}
             resetHandler={resetHandler}
             addButtonHandler={addButtonHandler}
           />
         </div>
-        {isVisible && (
-          <CardList blocks={blocks} removeBlock={removeBlock} />
-        )}
+        {isVisible && <CardList blocks={blocks} removeBlock={removeBlock} />}
       </div>
     </>
   );

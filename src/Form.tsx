@@ -1,84 +1,51 @@
+// Form.tsx
 import React from "react";
 import './component styles/Form.css';
 
 interface FormProps {
-  teamHandler: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setState: React.Dispatch<React.SetStateAction<string>>,
-    setDirty: React.Dispatch<React.SetStateAction<boolean>>,
-    setError: React.Dispatch<React.SetStateAction<string>>
+  formState: {
+    firstTeam: string;
+    secondTeam: string;
+    tickets: string;
+    stadium: string;
+    firstTeamDirty: boolean;
+    secondTeamDirty: boolean;
+    ticketsDirty: boolean;
+    stadiumDirty: boolean;
+    firstTeamError: string;
+    secondTeamError: string;
+    ticketsError: string;
+    stadiumError: string;
+  };
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
-  ticketsHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  stadiumHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  blurHandler: (
+  handleBlur: (
     e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
-  firstTeam: string;
-  firstTeamDirty: boolean;
-  firstTeamError: string;
-  secondTeam: string;
-  secondTeamDirty: boolean;
-  secondTeamError: string;
-  setFirstTeam: React.Dispatch<React.SetStateAction<string>>;
-  setFirstTeamDirty: React.Dispatch<React.SetStateAction<boolean>>;
-  setFirstTeamError: React.Dispatch<React.SetStateAction<string>>;
-  setSecondTeam: React.Dispatch<React.SetStateAction<string>>;
-  setSecondTeamDirty: React.Dispatch<React.SetStateAction<boolean>>;
-  setSecondTeamError: React.Dispatch<React.SetStateAction<string>>;
-  tickets: string;
-  ticketsDirty: boolean;
-  ticketsError: string;
-  stadium: string;
-  stadiumDirty: boolean;
-  stadiumError: string;
   formValid: boolean;
   resetHandler: () => void;
   addButtonHandler: () => void;
 }
 
-
-
 const Form: React.FC<FormProps> = ({
-  teamHandler,
-  ticketsHandler,
-  stadiumHandler,
-  blurHandler,
-  firstTeam,
-  firstTeamDirty,
-  firstTeamError,
-  secondTeam,
-  secondTeamDirty,
-  secondTeamError,
-  setFirstTeam,
-  setFirstTeamDirty,
-  setFirstTeamError,
-  setSecondTeam,
-  setSecondTeamDirty,
-  setSecondTeamError,
-  tickets,
-  ticketsDirty,
-  ticketsError,
-  stadiumDirty,
-  stadiumError,
+  formState,
+  handleInputChange,
+  handleBlur,
   formValid,
   resetHandler,
   addButtonHandler,
 }) => {
 
   return (
-    <form action="" className="form-container">
+    <form className="form-container">
       <label htmlFor="firstTeam">First Team:</label>
       <input
         onChange={(e) =>
-          teamHandler(
-            e,
-            setFirstTeam,
-            setFirstTeamDirty,
-            setFirstTeamError,
-          )
+          handleInputChange(e)
         }
-        onBlur={(e) => blurHandler(e)}
-        value={firstTeam}
+        onBlur={(e) => handleBlur(e)}
+        value={formState.firstTeam}
         name="firstTeam"
         type="text"
         className="input"
@@ -86,23 +53,18 @@ const Form: React.FC<FormProps> = ({
         placeholder="Enter first team..."
         required
       />
-      {firstTeamDirty && firstTeamError && (
+      {formState.firstTeamDirty && formState.firstTeamError && (
         <div style={{ color: "red", fontWeight: "bold", fontSize: "12px"}}>
-          {firstTeamError}
+          {formState.firstTeamError}
         </div>
       )}
       <label htmlFor="secondTeam">Second Team:</label>
       <input
         onChange={(e) =>
-          teamHandler(
-            e,
-            setSecondTeam,
-            setSecondTeamDirty,
-            setSecondTeamError
-          )
+          handleInputChange(e)
         }
-        onBlur={(e) => blurHandler(e)}
-        value={secondTeam}
+        onBlur={(e) => handleBlur(e)}
+        value={formState.secondTeam}
         name="secondTeam"
         type="text"
         className="input"
@@ -110,16 +72,16 @@ const Form: React.FC<FormProps> = ({
         placeholder="Enter second team..."
         required
       />
-       {secondTeamDirty && secondTeamError && (
+       {formState.secondTeamDirty && formState.secondTeamError && (
         <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
-          {secondTeamError}
+          {formState.secondTeamError}
         </div>
       )}
       <label htmlFor="numberOfTickets">Tickets:</label>
       <input
-        onChange={(e) => ticketsHandler(e)}
-        onBlur={(e) => blurHandler(e)}
-        value={tickets}
+        onChange={(e) => handleInputChange(e)}
+        onBlur={(e) => handleBlur(e)}
+        value={formState.tickets}
         name="tickets"
         type="number"
         className="input"
@@ -127,9 +89,9 @@ const Form: React.FC<FormProps> = ({
         placeholder="Enter the quantity of tickets..."
         required
       />
-      {ticketsDirty && ticketsError && (
+      {formState.ticketsDirty && formState.ticketsError && (
         <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
-          {ticketsError}
+          {formState.ticketsError}
         </div>
       )}
       <label htmlFor="stadium">Stadium:</label>
@@ -137,17 +99,17 @@ const Form: React.FC<FormProps> = ({
         name="stadium"
         id="stadium"
         className="input input_select"
-        onChange={(e) => stadiumHandler(e)}
-        onBlur={(e) => blurHandler(e)}
+        onChange={(e) => handleInputChange(e)}
+        onBlur={(e) => handleBlur(e)}
       >
         <option disabled>Choose Stadium:</option>
         <option value="">None</option>
         <option value="Parc Des Princes">Parc Des Princes</option>
         <option value="Camp Nou">Camp Nou</option>
       </select>
-      {stadiumDirty && stadiumError && (
+      {formState.stadiumDirty && formState.stadiumError && (
         <div style={{ color: "red", fontWeight: "bold", fontSize: "12px",marginBottom: "5px"}}>
-          {stadiumError}
+          {formState.stadiumError}
         </div>
       )}
       <div className="buttons">
@@ -172,3 +134,4 @@ const Form: React.FC<FormProps> = ({
 };
 
 export default Form;
+
