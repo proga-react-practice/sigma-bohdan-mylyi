@@ -1,49 +1,118 @@
-// Form.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './component styles/Form.css';
 
 interface FormProps {
-  formState: {
-    firstTeam: string;
-    secondTeam: string;
-    tickets: string;
-    stadium: string;
-    firstTeamDirty: boolean;
-    secondTeamDirty: boolean;
-    ticketsDirty: boolean;
-    stadiumDirty: boolean;
-    firstTeamError: string;
-    secondTeamError: string;
-    ticketsError: string;
-    stadiumError: string;
-  };
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-  handleBlur: (
-    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-  formValid: boolean;
-  resetHandler: () => void;
-  addButtonHandler: () => void;
+  addButtonHandler: (block: Block) => void;
 }
 
-const Form: React.FC<FormProps> = ({
-  formState,
-  handleInputChange,
-  handleBlur,
-  formValid,
-  resetHandler,
-  addButtonHandler,
-}) => {
+interface Block {
+  id: number;
+  firstTeam: string;
+  secondTeam: string;
+  tickets: string;
+  stadium: string;
+}
+
+const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
+  const [formState, setFormState] = useState({
+    firstTeam: "",
+    secondTeam: "",
+    tickets: "",
+    stadium: "",
+    firstTeamDirty: false,
+    secondTeamDirty: false,
+    ticketsDirty: false,
+    stadiumDirty: false,
+    firstTeamError: "Input can not be empty!",
+    secondTeamError: "Input can not be empty!",
+    ticketsError: "Input can not be empty!",
+    stadiumError: "Input can not be empty!",
+  });
+
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    const {
+      firstTeamError,
+      secondTeamError,
+      ticketsError,
+      stadiumError,
+    } = formState;
+    if (firstTeamError || secondTeamError || ticketsError || stadiumError) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [formState]);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name === "tickets" && parseInt(value) < 0) {
+      setFormState((prevState) => ({
+        ...prevState,
+        [name]: value,
+        [`${name}Dirty`]: true,
+        [`${name}Error`]: "Quantity of tickets cannot be negative!",
+      }));
+    } else {
+      setFormState((prevState) => ({
+        ...prevState,
+        [name]: value,
+        [`${name}Dirty`]: true,
+        [`${name}Error`]: value ? "" : "Input can not be empty!",
+      }));
+    }
+  };
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [`${name}Dirty`]: true,
+      [`${name}Error`]: value ? "" : "Input can not be empty!",
+    }));
+  };
+
+  const resetHandler = () => {
+    setFormState({
+      firstTeam: "",
+      secondTeam: "",
+      tickets: "",
+      stadium: "",
+      firstTeamDirty: false,
+      secondTeamDirty: false,
+      ticketsDirty: false,
+      stadiumDirty: false,
+      firstTeamError: "Input can not be empty!",
+      secondTeamError: "Input can not be empty!",
+      ticketsError: "Input can not be empty!",
+      stadiumError: "Input can not be empty!",
+    });
+  };
+
+  const handleAddButtonClick = () => {
+    const { firstTeam, secondTeam, tickets, stadium } = formState;
+    if (formValid) {
+      addButtonHandler({
+        id: Date.now(),
+        firstTeam,
+        secondTeam,
+        tickets,
+        stadium,
+      });
+      resetHandler();
+    }
+  };
 
   return (
     <form className="form-container">
       <label htmlFor="firstTeam">First Team:</label>
       <input
-        onChange={(e) =>
-          handleInputChange(e)
-        }
+        onChange={(e) => handleInputChange(e)}
         onBlur={(e) => handleBlur(e)}
         value={formState.firstTeam}
         name="firstTeam"
@@ -60,9 +129,7 @@ const Form: React.FC<FormProps> = ({
       )}
       <label htmlFor="secondTeam">Second Team:</label>
       <input
-        onChange={(e) =>
-          handleInputChange(e)
-        }
+        onChange={(e) => handleInputChange(e)}
         onBlur={(e) => handleBlur(e)}
         value={formState.secondTeam}
         name="secondTeam"
@@ -110,28 +177,27 @@ const Form: React.FC<FormProps> = ({
       {formState.stadiumDirty && formState.stadiumError && (
         <div style={{ color: "red", fontWeight: "bold", fontSize: "12px",marginBottom: "5px"}}>
           {formState.stadiumError}
-        </div>
-      )}
-      <div className="buttons">
-        <button
-          type="reset"
-          className="buttonReset"
-          onClick={resetHandler}
-        >
-          <span className="button-content">Reset</span>
-        </button>
-        <button
-          type="button"
-          className="buttonAdd"
-          disabled={!formValid}
-          onClick={addButtonHandler}
-        >
-          <span className="button-content">Add</span>
-        </button>
-      </div>
-    </form>
-  );
+          </div>
+  )}
+  <div className="buttons">
+    <button
+      type="reset"
+      className="buttonReset"
+      onClick={resetHandler}
+    >
+      <span className="button-content">Reset</span>
+    </button>
+    <button
+      type="button"
+      className="buttonAdd"
+      disabled={!formValid}
+      onClick={handleAddButtonClick}
+    >
+      <span className="button-content">Add</span>
+    </button>
+  </div>
+</form>
+);
 };
 
 export default Form;
-
