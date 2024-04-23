@@ -1,0 +1,72 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    width: 400px;
+    font-weight: bold;
+    height: 175px;
+    background-color: #fff;
+    box-shadow: 0 0 15px #161A30;
+    margin-top: 5px;
+  }
+  
+  .cardTitle {
+    font-weight: bold;
+    margin: 10px 0 5px;
+  }
+  
+  .cardLabel {
+    font-weight: 500;
+    margin: 5px 0 0;
+  }
+
+  .deleteCardButton:disabled::before,
+.buttonReset:disabled::before,
+.buttonAdd:disabled::before {
+  display: none;
+}
+
+.deleteCardButton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(
+      82.3deg,
+      rgb(222, 66, 66) 10.8%,
+      rgb(212, 131, 55) 94.3%
+    );
+    transition: all 0.475s;
+  }
+
+  .deleteCardButton:hover::before,
+.buttonReset:hover::before,
+.buttonAdd:hover::before {
+  transform: scaleX(1);
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+}
+
+.deleteCardButton {
+    height: 25px;
+    width: 100px; 
+    position: relative;
+    overflow: hidden;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #3d3a4e;
+    background-size: 400%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px auto 10px;
+  }
