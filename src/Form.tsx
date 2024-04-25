@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import './component styles/Form.css';
+import "./component styles/Form.css";
+import TextField from "@mui/material/TextField";
+import { Button, Typography } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Grid from "@mui/material/Grid";
 
 interface FormProps {
   addButtonHandler: (block: Block) => void;
@@ -32,12 +36,8 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
-    const {
-      firstTeamError,
-      secondTeamError,
-      ticketsError,
-      stadiumError,
-    } = formState;
+    const { firstTeamError, secondTeamError, ticketsError, stadiumError } =
+      formState;
     if (firstTeamError || secondTeamError || ticketsError || stadiumError) {
       setFormValid(false);
     } else {
@@ -46,7 +46,9 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   }, [formState]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     if (name === "tickets" && parseInt(value) < 0) {
@@ -67,7 +69,9 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   };
 
   const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormState((prevState) => ({
@@ -110,94 +114,143 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
 
   return (
     <form className="form-container">
-      <label htmlFor="firstTeam">First Team:</label>
-      <input
+      <TextField
+        id="firstTeam"
+        label="First Team:"
+        variant="standard"
         onChange={(e) => handleInputChange(e)}
         onBlur={(e) => handleBlur(e)}
         value={formState.firstTeam}
         name="firstTeam"
         type="text"
         className="input"
-        id="firstTeam"
         placeholder="Enter first team..."
-        required
+        sx={{
+          marginBottom: 3,
+        }}
       />
       {formState.firstTeamDirty && formState.firstTeamError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px"}}>
+        <Typography sx={{ color: "red", fontWeight: "bold", fontSize: 13 }}>
           {formState.firstTeamError}
-        </div>
+        </Typography>
       )}
-      <label htmlFor="secondTeam">Second Team:</label>
-      <input
+      <TextField
+        id="secondTeam"
+        label="Second Team:"
+        variant="standard"
         onChange={(e) => handleInputChange(e)}
         onBlur={(e) => handleBlur(e)}
         value={formState.secondTeam}
         name="secondTeam"
         type="text"
         className="input"
-        id="secondTeam"
         placeholder="Enter second team..."
-        required
+        sx={{
+          marginBottom: 3,
+        }}
       />
-       {formState.secondTeamDirty && formState.secondTeamError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
+      {formState.secondTeamDirty && formState.secondTeamError && (
+        <Typography sx={{ color: "red", fontWeight: "bold", fontSize: 13 }}>
           {formState.secondTeamError}
-        </div>
+        </Typography>
       )}
-      <label htmlFor="numberOfTickets">Tickets:</label>
-      <input
+      <TextField
+        id="numberOfTickets"
+        label="Tickets:"
+        variant="standard"
         onChange={(e) => handleInputChange(e)}
         onBlur={(e) => handleBlur(e)}
         value={formState.tickets}
         name="tickets"
         type="number"
         className="input"
-        id="numberOfTickets"
         placeholder="Enter the quantity of tickets..."
-        required
+        sx={{
+          marginBottom: 3,
+        }}
       />
       {formState.ticketsDirty && formState.ticketsError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
+        <Typography sx={{ color: "red", fontWeight: "bold", fontSize: 13 }}>
           {formState.ticketsError}
-        </div>
+        </Typography>
       )}
-      <label htmlFor="stadium">Stadium:</label>
-      <select
-        name="stadium"
+      <TextField
         id="stadium"
-        className="input input_select"
+        select
+        label="Stadium:"
+        variant="standard"
         onChange={(e) => handleInputChange(e)}
         onBlur={(e) => handleBlur(e)}
+        value={formState.stadium}
+        name="stadium"
+        className="input"
+        placeholder="Choose Stadium..."
+        sx={{
+          marginBottom: 3,
+        }}
       >
-        <option disabled>Choose Stadium:</option>
-        <option value="">None</option>
-        <option value="Parc Des Princes">Parc Des Princes</option>
-        <option value="Camp Nou">Camp Nou</option>
-      </select>
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={"Parc des Princes"}>Parc des Princes</MenuItem>
+        <MenuItem value={"Camp Nou"}>Camp Nou</MenuItem>
+      </TextField>
       {formState.stadiumDirty && formState.stadiumError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px",marginBottom: "5px"}}>
+        <Typography sx={{ color: "red", fontWeight: "bold", fontSize: 13 }}>
           {formState.stadiumError}
-          </div>
-  )}
-  <div className="buttons">
-    <button
-      type="reset"
-      className="buttonReset"
-      onClick={resetHandler}
-    >
-      <span className="button-content">Reset</span>
-    </button>
-    <button
-      type="button"
-      className="buttonAdd"
-      disabled={!formValid}
-      onClick={handleAddButtonClick}
-    >
-      <span className="button-content">Add</span>
-    </button>
-  </div>
-</form>
-);
+        </Typography>
+      )}
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        <Button
+          type="reset"
+          variant="outlined"
+          onClick={resetHandler}
+          sx={
+            {
+              fontSize: 12,
+              marginTop: 3,
+              height: 27,
+              width: 100,
+              color: "black",
+              border: 1,
+              '&:hover': {
+                color: "white",
+                backgroundColor: "black",
+              },
+            }
+          }
+        >
+          Reset
+        </Button>
+        <Button
+          type="button"
+          disabled={!formValid}
+          onClick={handleAddButtonClick}
+          sx={
+            {
+              fontSize: 12,
+              marginTop: 3,
+              height: 27,
+              width: 100,
+              color: "black",
+              border: 1,
+              '&:hover': {
+                color: "white",
+                backgroundColor: "black",
+              },
+            }
+          }
+        >
+          <span className="button-content">Add</span>
+        </Button>
+      </Grid>
+    </form>
+  );
 };
 
 export default Form;
