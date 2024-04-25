@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import Form from "./Form";
 import CardList from "./CardList";
+import { Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
 
 interface Block {
   id: number;
@@ -26,15 +28,39 @@ const App: React.FC = () => {
 
   return (
     <>
-      <div className="page">
-        <div className="container">
-          <h2>Football Match Form</h2>
+      <Grid 
+      sx={{
+        display: "flex",
+        flexDirection: 'row',
+        gap: 15
+      }}>
+        <Grid 
+        sx={{
+          paddingTop: 4,
+          paddingBottom: 6,
+          paddingLeft: 3, 
+          paddingRight: 3,
+          borderRadius: 10,
+          backgroundColor: 'white',
+          boxShadow: 5
+
+        }}>
+          <Typography 
+          sx={{
+            marginTop: 3,
+            marginBottom: 3, 
+            fontSize: 23,
+            fontFamily: "Platypi",
+            fontWeight: 600,
+          }}>
+            Football Match Form
+          </Typography>
           <Form
             addButtonHandler={addButtonHandler}
           />
-        </div>
+        </Grid>
         {isVisible && <CardList blocks={blocks} removeBlock={removeBlock} />}
-      </div>
+      </Grid>
     </>
   );
 };

@@ -13,14 +13,6 @@
   gap: 200px;
 }
 
-.container {
-  padding: 20px 15px 30px;
-  border-radius: 15px;
-  background-color: #fff;
-  box-shadow: 0 0 15px #161A30;
-  max-height: 410px;
-}
-
 .deleteCardButton:hover::before,
 .buttonReset:hover::before,
 .buttonAdd:hover::before {

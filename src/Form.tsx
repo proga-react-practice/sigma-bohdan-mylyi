@@ -113,7 +113,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   };
 
   return (
-    <form className="form-container">
+    <form className="form-container" >
       <TextField
         id="firstTeam"
         label="First Team:"
