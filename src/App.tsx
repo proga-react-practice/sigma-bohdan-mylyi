@@ -4,6 +4,7 @@ import Form from "./Form";
 import CardList from "./CardList";
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import Box from '@mui/material/Box';
 
 interface Block {
   id: number;
@@ -28,7 +29,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Grid 
+      <Box
       sx={{
         display: "flex",
         flexDirection: 'row',
@@ -60,7 +61,7 @@ const App: React.FC = () => {
           />
         </Grid>
         {isVisible && <CardList blocks={blocks} removeBlock={removeBlock} />}
-      </Grid>
+      </Box>
     </>
   );
 };
