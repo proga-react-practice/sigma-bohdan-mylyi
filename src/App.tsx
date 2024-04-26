@@ -9,6 +9,7 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
+import Header from "./Header";
 
 interface Block {
   id: number;
@@ -35,6 +36,7 @@ const App: React.FC = () => {
     palette: {
       primary: {
         main: "#fff",
+        light: "#333"
       },
       secondary: {
         main: "#000",
@@ -44,6 +46,7 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
         <Box
           sx={{
             display: "flex",
@@ -60,6 +63,7 @@ const App: React.FC = () => {
               borderRadius: 10,
               backgroundColor: "primary.main",
               boxShadow: 5,
+              color: "secondary.main"
             }}
           >
             <Typography
