@@ -241,6 +241,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
             variant="outlined"
             onClick={resetHandler}
             sx={{
+              borderRadius: theme.spacing(1.5),
               fontSize: theme.spacing(2.4),
               marginTop: theme.spacing(5),
               height: theme.spacing(5.2),
@@ -260,6 +261,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
             disabled={!formValid}
             onClick={handleAddButtonClick}
             sx={{
+              borderRadius: theme.spacing(1.5),
               fontSize: theme.spacing(2.4),
               marginTop: theme.spacing(5),
               height: theme.spacing(5.2),
