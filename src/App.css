@@ -5,14 +5,7 @@
   text-align: center;
   font-size: 14px;
   color: #161A30;
-}
-
-.page {
-  display: flex;
-  flex-direction: row;
-  gap: 200px;
-}
-
+} 
 .deleteCardButton:hover::before,
 .buttonReset:hover::before,
 .buttonAdd:hover::before {

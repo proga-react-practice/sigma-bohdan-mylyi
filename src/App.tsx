@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import "./App.css";
 import Form from "./Form";
 import CardList from "./CardList";
-import { Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import Box from '@mui/material/Box';
+import {
+  Typography,
+  Grid,
+  Box,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 
 interface Block {
   id: number;
@@ -27,42 +31,53 @@ const App: React.FC = () => {
     setBlocks(blocks.filter((block) => block.id !== id));
   };
 
-  return (
-    <>
-      <Box
-      sx={{
-        display: "flex",
-        flexDirection: 'row',
-        gap: 15
-      }}>
-        <Grid 
-        sx={{
-          paddingTop: 4,
-          paddingBottom: 6,
-          paddingLeft: 3, 
-          paddingRight: 3,
-          borderRadius: 10,
-          backgroundColor: 'white',
-          boxShadow: 5
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#fff",
+      },
+      secondary: {
+        main: "#000",
+      },
+    },
+  });
 
-        }}>
-          <Typography 
+  return (
+    <ThemeProvider theme={theme}>
+        <Box
           sx={{
-            marginTop: 3,
-            marginBottom: 3, 
-            fontSize: 23,
-            fontFamily: "Platypi",
-            fontWeight: 600,
-          }}>
-            Football Match Form
-          </Typography>
-          <Form
-            addButtonHandler={addButtonHandler}
-          />
-        </Grid>
-        {isVisible && <CardList blocks={blocks} removeBlock={removeBlock} />}
-      </Box>
-    </>
+            display: "flex",
+            flexDirection: "row",
+            gap: 15,
+          }}
+        >
+          <Grid
+            sx={{
+              paddingTop: 4,
+              paddingBottom: 6,
+              paddingLeft: 3,
+              paddingRight: 3,
+              borderRadius: 10,
+              backgroundColor: "primary.main",
+              boxShadow: 5,
+            }}
+          >
+            <Typography
+              sx={{
+                marginTop: 3,
+                marginBottom: 3,
+                fontSize: 23,
+                fontFamily: "Platypi",
+                fontWeight: 600,
+              }}
+            >
+              Football Match Form
+            </Typography>
+            <Form addButtonHandler={addButtonHandler} />
+          </Grid>
+          {isVisible && <CardList blocks={blocks} removeBlock={removeBlock} />}
+        </Box>
+    </ThemeProvider>
   );
 };
 

@@ -5,13 +5,6 @@
     flex-direction: column;
   }
   
-  .input {
-    margin-bottom: 10px;
-    width: 300px;
-    height: 25px;
-    border-radius: 5px;
-  }
-  
   .input_select {
     width: 100%;
   }
