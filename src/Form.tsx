@@ -7,8 +7,8 @@ import {
   Grid,
   TextField,
   ThemeProvider,
-  createTheme,
 } from "@mui/material";
+import { theme } from './theme'
 
 interface FormProps {
   addButtonHandler: (block: Block) => void;
@@ -117,18 +117,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
     }
   };
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#fff",
-      },
-      secondary: {
-        main: "#000",
-        light: "#333"
-      },
-    },
-    spacing: 5,
-  });
 
   return (
     <form className="form-container">
