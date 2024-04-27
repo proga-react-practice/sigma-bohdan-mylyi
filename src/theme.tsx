@@ -28,8 +28,18 @@ export const theme = createTheme({
             height: '25px',
             borderRadius: '5px',
             marginLeft: '10px',
-            marginRight: '10px'
+            marginRight: '10px',
+            '& .MuiInput-underline:before': {
+              borderBottomColor: '#000',
+            },
+            '& .MuiInput-underline:after': {
+              borderBottomColor: '#000',
+            },
+            '& .MuiInput-underline:hover:before': {
+              borderBottomColor: '#000',
+            },
           },
+          
       },
   },
   },

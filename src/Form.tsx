@@ -133,7 +133,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           placeholder="Enter first team..."
         />
         {formState.firstTeamDirty && formState.firstTeamError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontSize: theme.spacing(2.6) }}>
+          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
             {formState.firstTeamError}
           </Typography>
         )}
@@ -150,7 +150,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           placeholder="Enter second team..."
         />
         {formState.secondTeamDirty && formState.secondTeamError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontSize: theme.spacing(2.6) }}>
+          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
             {formState.secondTeamError}
           </Typography>
         )}
@@ -167,7 +167,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           placeholder="Enter the quantity of tickets..."
         />
         {formState.ticketsDirty && formState.ticketsError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontSize: theme.spacing(2.6) }}>
+          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
             {formState.ticketsError}
           </Typography>
         )}
@@ -190,7 +190,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           <MenuItem value={"Camp Nou"}>Camp Nou</MenuItem>
         </TextField>
         {formState.stadiumDirty && formState.stadiumError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontSize: theme.spacing(2.6) }}>
+          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
             {formState.stadiumError}
           </Typography>
         )}

@@ -1,33 +1,34 @@
 import React, { useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, ThemeProvider, Typography } from "@mui/material";
 import Form from "./Form";
 import CardList from "./CardList";
 import Header from "./Header";
 import { theme } from "./theme";
 
 interface Block {
-    id: number;
-    firstTeam: string;
-    secondTeam: string;
-    tickets: string;
-    stadium: string;
-  }
+  id: number;
+  firstTeam: string;
+  secondTeam: string;
+  tickets: string;
+  stadium: string;
+}
 
 const Container: React.FC = () => {
-    const [blocks, setBlocks] = useState<Block[]>([]);
-    const [isVisible, setIsVisible] = useState(false);
-  
-    const addButtonHandler = (block: Block) => {
-      setBlocks([...blocks, block]);
-      setIsVisible(true);
-    };
-  
-    const removeBlock = (id: number) => {
-      setBlocks(blocks.filter((block) => block.id !== id));
-    };
+  const [blocks, setBlocks] = useState<Block[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const addButtonHandler = (block: Block) => {
+    setBlocks([...blocks, block]);
+    setIsVisible(true);
+  };
+
+  const removeBlock = (id: number) => {
+    setBlocks(blocks.filter((block) => block.id !== id));
+  };
   return (
     <>
-      <Header />
+      <ThemeProvider theme={theme}>
+        <Header />
         <Box
           sx={{
             display: "flex",
@@ -44,7 +45,7 @@ const Container: React.FC = () => {
               borderRadius: theme.spacing(8),
               backgroundColor: "primary.main",
               boxShadow: 5,
-              color: "secondary.main"
+              color: "secondary.main",
             }}
           >
             <Typography
@@ -61,6 +62,7 @@ const Container: React.FC = () => {
           </Grid>
           {isVisible && <CardList blocks={blocks} removeBlock={removeBlock} />}
         </Box>
+      </ThemeProvider>
     </>
   );
 };
