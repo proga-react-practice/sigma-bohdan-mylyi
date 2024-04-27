@@ -131,12 +131,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           name="firstTeam"
           type="text"
           placeholder="Enter first team..."
-          sx={{
-            marginBottom: theme.spacing(6),
-            width: theme.spacing(60),
-            height: theme.spacing(5),
-            borderRadius: theme.spacing(1)
-          }}
         />
         {formState.firstTeamDirty && formState.firstTeamError && (
           <Typography sx={{ color: "red", fontWeight: "bold", fontSize: theme.spacing(2.6) }}>
@@ -154,12 +148,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           type="text"
           className="input"
           placeholder="Enter second team..."
-          sx={{
-            marginBottom: theme.spacing(6),
-            width: theme.spacing(60),
-            height: theme.spacing(5),
-            borderRadius: theme.spacing(1)
-          }}
         />
         {formState.secondTeamDirty && formState.secondTeamError && (
           <Typography sx={{ color: "red", fontWeight: "bold", fontSize: theme.spacing(2.6) }}>
@@ -177,12 +165,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           type="number"
           className="input"
           placeholder="Enter the quantity of tickets..."
-          sx={{
-            marginBottom: theme.spacing(6),
-            width: theme.spacing(60),
-            height: theme.spacing(5),
-            borderRadius: theme.spacing(1)
-          }}
         />
         {formState.ticketsDirty && formState.ticketsError && (
           <Typography sx={{ color: "red", fontWeight: "bold", fontSize: theme.spacing(2.6) }}>
@@ -200,12 +182,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           name="stadium"
           className="input"
           placeholder="Choose Stadium..."
-          sx={{
-            marginBottom: theme.spacing(6),
-            width: theme.spacing(60),
-            height: theme.spacing(5),
-            borderRadius: theme.spacing(1),
-          }}
         >
           <MenuItem value="">
             <em>None</em>
@@ -228,19 +204,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
             type="reset"
             variant="outlined"
             onClick={resetHandler}
-            sx={{
-              borderRadius: theme.spacing(1.5),
-              fontSize: theme.spacing(2.4),
-              marginTop: theme.spacing(5),
-              height: theme.spacing(5.2),
-              width: theme.spacing(20),
-              color: "secondary.main",
-              border: 1,
-              "&:hover": {
-                color: "primary.main",
-                backgroundColor: "secondary.main",
-              },
-            }}
           >
             Reset
           </Button>
@@ -248,19 +211,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
             type="button"
             disabled={!formValid}
             onClick={handleAddButtonClick}
-            sx={{
-              borderRadius: theme.spacing(1.5),
-              fontSize: theme.spacing(2.4),
-              marginTop: theme.spacing(5),
-              height: theme.spacing(5.2),
-              width: theme.spacing(20),
-              color: "secondary.main",
-              border: 1,
-              "&:hover": {
-                color: "primary.main",
-                backgroundColor: "secondary.main",
-              },
-            }}
           >
             <span className="button-content">Add</span>
           </Button>

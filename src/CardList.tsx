@@ -6,8 +6,8 @@ import {
   Box,
   Grid,
   ThemeProvider,
-  createTheme,
 } from "@mui/material";
+import { theme } from './theme'
 
 interface Block {
   id: number;
@@ -21,19 +21,6 @@ interface CardListProps {
   blocks: Block[];
   removeBlock: (id: number) => void;
 }
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#fff",
-    },
-    secondary: {
-      main: "#000",
-      light: "#333",
-    },
-  },
-  spacing: 5,
-});
 
 const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
   return (
