@@ -45,7 +45,7 @@ const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
           >
             <Typography
               sx={{
-                marginTop: theme.spacing(1),
+                marginTop: theme.spacing(3),
                 fontSize: theme.spacing(4),
                 fontFamily: "Platypi",
                 fontWeight: 600,
@@ -83,20 +83,10 @@ const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
             <Button
               onClick={() => removeBlock(block.id)}
               sx={{
-                borderRadius: theme.spacing(1.5),
                 marginLeft: "auto",
                 marginRight: "auto",
-                fontSize: theme.spacing(2.4),
-                marginTop: theme.spacing(2),
-                marginBottom: theme.spacing(3),
-                height: theme.spacing(5.2),
-                width: theme.spacing(20),
-                color: "secondary.main",
-                border: 1,
-                "&:hover": {
-                  color: "primary.main",
-                  backgroundColor: "secondary.main",
-                },
+                marginTop: theme.spacing(3),
+                marginBottom: theme.spacing(3)
               }}
             >
               Delete
