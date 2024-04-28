@@ -34,6 +34,9 @@ const Container: React.FC = () => {
             display: "flex",
             flexDirection: "row",
             gap: theme.spacing(5),
+            "@media screen and (max-width: 770px)": {
+              flexDirection: "column",
+            },
           }}
         >
           <Grid

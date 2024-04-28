@@ -12,6 +12,7 @@ const Header: React.FC = () => {
             position: "absolute",
             top: 0,
             left: 0,
+            minWidth: "450px"
           }}
         >
           <Toolbar>
