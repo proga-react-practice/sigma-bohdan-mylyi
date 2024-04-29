@@ -41,14 +41,16 @@ const Container: React.FC = () => {
         >
           <Grid
             sx={{
+              mt: theme.spacing(20),
               paddingTop: theme.spacing(10),
               paddingBottom: theme.spacing(8),
-              paddingLeft: theme.spacing(2),
-              paddingRight: theme.spacing(2),
+              paddingLeft: theme.spacing(5),
+              paddingRight: theme.spacing(5),
               borderRadius: theme.spacing(8),
               backgroundColor: "primary.main",
               boxShadow: 5,
               color: "secondary.main",
+              maxHeight:theme.spacing(82)
             }}
           >
             <Typography

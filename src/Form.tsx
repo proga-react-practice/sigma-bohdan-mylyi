@@ -7,8 +7,12 @@ import {
   Grid,
   TextField,
   ThemeProvider,
+  Box,
 } from "@mui/material";
-import { theme } from './theme'
+import { theme } from "./theme";
+import GroupsIcon from '@mui/icons-material/Groups';
+import StadiumIcon from '@mui/icons-material/Stadium';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 interface FormProps {
   addButtonHandler: (block: Block) => void;
@@ -117,26 +121,45 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
     }
   };
 
-
   return (
     <form className="form-container">
       <ThemeProvider theme={theme}>
-        <TextField
-          id="firstTeam"
-          label="First Team:"
-          variant="standard"
-          onChange={(e) => handleInputChange(e)}
-          onBlur={(e) => handleBlur(e)}
-          value={formState.firstTeam}
-          name="firstTeam"
-          type="text"
-          placeholder="Enter first team..."
-        />
+        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+          <GroupsIcon 
+          sx={{ 
+            color: "action.active", 
+            mb: theme.spacing(2),
+           }} />
+          <TextField
+            id="firstTeam"
+            label="First Team:"
+            variant="standard"
+            onChange={(e) => handleInputChange(e)}
+            onBlur={(e) => handleBlur(e)}
+            value={formState.firstTeam}
+            name="firstTeam"
+            type="text"
+            placeholder="Enter first team..."
+          />
+        </Box>
         {formState.firstTeamDirty && formState.firstTeamError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
+          <Typography
+            sx={{
+              color: "red",
+              fontWeight: "bold",
+              fontFamily: "Forum",
+              fontSize: theme.spacing(2.9),
+            }}
+          >
             {formState.firstTeamError}
           </Typography>
         )}
+        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+          <GroupsIcon 
+          sx={{ 
+            color: "action.active", 
+            mb: theme.spacing(2),
+           }} />
         <TextField
           id="secondTeam"
           label="Second Team:"
@@ -149,11 +172,25 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           className="input"
           placeholder="Enter second team..."
         />
+        </Box>
         {formState.secondTeamDirty && formState.secondTeamError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
+          <Typography
+            sx={{
+              color: "red",
+              fontWeight: "bold",
+              fontFamily: "Forum",
+              fontSize: theme.spacing(2.9),
+            }}
+          >
             {formState.secondTeamError}
           </Typography>
         )}
+        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+          <ReceiptIcon 
+          sx={{ 
+            color: "action.active", 
+            mb: theme.spacing(2),
+           }} />
         <TextField
           id="numberOfTickets"
           label="Tickets:"
@@ -166,11 +203,25 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           className="input"
           placeholder="Enter the quantity of tickets..."
         />
+        </Box>
         {formState.ticketsDirty && formState.ticketsError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
+          <Typography
+            sx={{
+              color: "red",
+              fontWeight: "bold",
+              fontFamily: "Forum",
+              fontSize: theme.spacing(2.9),
+            }}
+          >
             {formState.ticketsError}
           </Typography>
         )}
+        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+          <StadiumIcon 
+          sx={{ 
+            color: "action.active", 
+            mb: theme.spacing(2),
+           }} />
         <TextField
           id="stadium"
           select
@@ -189,8 +240,17 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           <MenuItem value={"Parc des Princes"}>Parc des Princes</MenuItem>
           <MenuItem value={"Camp Nou"}>Camp Nou</MenuItem>
         </TextField>
+        </Box>
+
         {formState.stadiumDirty && formState.stadiumError && (
-          <Typography sx={{ color: "red", fontWeight: "bold", fontFamily: 'Forum', fontSize: theme.spacing(2.9) }}>
+          <Typography
+            sx={{
+              color: "red",
+              fontWeight: "bold",
+              fontFamily: "Forum",
+              fontSize: theme.spacing(2.9),
+            }}
+          >
             {formState.stadiumError}
           </Typography>
         )}
@@ -200,11 +260,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           justifyContent="space-around"
           alignItems="center"
         >
-          <Button
-            type="reset"
-            variant="outlined"
-            onClick={resetHandler}
-          >
+          <Button type="reset" variant="outlined" onClick={resetHandler}>
             Reset
           </Button>
           <Button

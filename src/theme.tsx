@@ -16,7 +16,7 @@ export const theme = createTheme({
               "&:hover": {
                 color: "#fff",
                 backgroundColor: "#000",
-              }
+              },
         },
       },
     },
@@ -24,7 +24,7 @@ export const theme = createTheme({
       styleOverrides: {
           root: {
             marginBottom: '30px',
-            width: '280px',
+            width: '270px',
             height: '25px',
             borderRadius: '5px',
             marginLeft: '10px',

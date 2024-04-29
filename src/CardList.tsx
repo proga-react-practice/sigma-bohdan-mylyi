@@ -26,8 +26,12 @@ const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
   return (
     <ThemeProvider theme={theme}>
       <Box
-        sx={{
-          margin: 0,
+        sx={{mt: theme.spacing(20),
+          "@media screen and (max-width: 770px)": {
+            ml: 'auto',
+            mr: 'auto',
+            mt: theme.spacing(5)
+          },
         }}
       >
         {blocks.map((block) => (
