@@ -2,6 +2,7 @@ import { AppBar, Box, Toolbar, Badge, Avatar, ThemeProvider, Tooltip, Menu, Menu
 import React from "react";
 import { theme } from "./theme";
 import { Instagram, Telegram } from "@mui/icons-material";
+import ProgressBar from "./ProgressBar";
 
 const Header: React.FC = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<HTMLButtonElement | null>(null);
@@ -38,6 +39,7 @@ const Header: React.FC = () => {
             minWidth: "450px"
           }}
         >
+          <ProgressBar />
           <Toolbar>
             <Badge
               overlap="circular"
