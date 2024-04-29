@@ -36,14 +36,12 @@ const Header: React.FC = () => {
             position: "absolute",
             top: 0,
             left: 0,
-            minWidth: "450px"
+            "@media screen and (max-width: 426px)": {
+              width: '100%'
+            },
           }}
         >
-<<<<<<< HEAD
           <ProgressBar />
-=======
-      <ProgressBar />
->>>>>>> df38737 (fix some problems after review)
           <Toolbar>
             <Badge
               overlap="circular"

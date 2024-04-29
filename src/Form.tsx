@@ -128,6 +128,7 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        maxHeight: '500px'
       }}
     >
       <Box

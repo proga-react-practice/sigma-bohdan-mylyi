@@ -28,7 +28,7 @@ const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
           "@media screen and (max-width: 770px)": {
             ml: 'auto',
             mr: 'auto',
-            mt: theme.spacing(5)
+            mt: theme.spacing(5),
           },
         }}
       >
@@ -43,6 +43,9 @@ const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
               backgroundColor: "primary.main",
               boxShadow: 5,
               marginTop: theme.spacing(2),
+              "@media screen and (max-width: 426px)": {
+                width: theme.spacing(40),
+              },
             }}
           >
             <Typography

@@ -46,6 +46,10 @@ const Container: React.FC = () => {
               paddingLeft: theme.spacing(5),
               paddingRight: theme.spacing(5),
               borderRadius: theme.spacing(8),
+              "@media screen and (max-width: 426px)": {
+                pl: theme.spacing(2),
+                pr: theme.spacing(2)
+              },
               backgroundColor: "primary.main",
               boxShadow: 5,
               color: "secondary.main",
@@ -57,6 +61,9 @@ const Container: React.FC = () => {
                 fontSize: theme.spacing(5),
                 fontFamily: "Platypi",
                 fontWeight: 600,
+                "@media screen and (max-width: 426px)": {
+                  fontSize: theme.spacing(4),
+                },
               }}
             >
               Football Match Form

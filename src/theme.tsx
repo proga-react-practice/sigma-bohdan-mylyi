@@ -40,6 +40,9 @@ export const theme = createTheme({
             borderRadius: '5px',
             marginLeft: '10px',
             marginRight: '10px',
+            "@media screen and (max-width: 426px)": {
+              width: '160px'
+            },
             '& .MuiInput-underline:before': {
               borderBottomColor: theme.palette.secondary.main,
             },
