@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Grid, ThemeProvider, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Form from "./Form";
 import CardList from "./CardList";
 import Header from "./Header";
@@ -27,7 +27,6 @@ const Container: React.FC = () => {
   };
   return (
     <>
-      <ThemeProvider theme={theme}>
         <Header />
         <Box
           sx={{
@@ -50,7 +49,6 @@ const Container: React.FC = () => {
               backgroundColor: "primary.main",
               boxShadow: 5,
               color: "secondary.main",
-              maxHeight:theme.spacing(82)
             }}
           >
             <Typography
@@ -67,7 +65,6 @@ const Container: React.FC = () => {
           </Grid>
           {isVisible && <CardList blocks={blocks} removeBlock={removeBlock} />}
         </Box>
-      </ThemeProvider>
     </>
   );
 };

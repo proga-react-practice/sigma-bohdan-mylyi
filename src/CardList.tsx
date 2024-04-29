@@ -5,7 +5,6 @@ import {
   Typography,
   Box,
   Grid,
-  ThemeProvider,
 } from "@mui/material";
 import { theme } from './theme'
 
@@ -24,7 +23,6 @@ interface CardListProps {
 
 const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
   return (
-    <ThemeProvider theme={theme}>
       <Box
         sx={{mt: theme.spacing(20),
           "@media screen and (max-width: 770px)": {
@@ -98,7 +96,6 @@ const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
           </Grid>
         ))}
       </Box>
-    </ThemeProvider>
   );
 };
 

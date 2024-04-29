@@ -6,13 +6,13 @@ import {
   MenuItem,
   Grid,
   TextField,
-  ThemeProvider,
   Box,
 } from "@mui/material";
 import { theme } from "./theme";
-import GroupsIcon from '@mui/icons-material/Groups';
-import StadiumIcon from '@mui/icons-material/Stadium';
-import ReceiptIcon from '@mui/icons-material/Receipt';
+import GroupsIcon from "@mui/icons-material/Groups";
+import StadiumIcon from "@mui/icons-material/Stadium";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import FormGroup from "@mui/material/FormGroup";
 
 interface FormProps {
   addButtonHandler: (block: Block) => void;
@@ -122,44 +122,57 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   };
 
   return (
-    <form className="form-container">
-      <ThemeProvider theme={theme}>
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-          <GroupsIcon 
-          sx={{ 
-            color: "action.active", 
+    <FormGroup
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
+        <GroupsIcon
+          sx={{
+            color: "action.active",
             mb: theme.spacing(2),
-           }} />
-          <TextField
-            id="firstTeam"
-            label="First Team:"
-            variant="standard"
-            onChange={(e) => handleInputChange(e)}
-            onBlur={(e) => handleBlur(e)}
-            value={formState.firstTeam}
-            name="firstTeam"
-            type="text"
-            placeholder="Enter first team..."
-          />
-        </Box>
-        {formState.firstTeamDirty && formState.firstTeamError && (
-          <Typography
-            sx={{
-              color: "red",
-              fontWeight: "bold",
-              fontFamily: "Forum",
-              fontSize: theme.spacing(2.9),
-            }}
-          >
-            {formState.firstTeamError}
-          </Typography>
-        )}
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-          <GroupsIcon 
-          sx={{ 
-            color: "action.active", 
+          }}
+        />
+        <TextField
+          id="firstTeam"
+          label="First Team:"
+          variant="standard"
+          onChange={(e) => handleInputChange(e)}
+          onBlur={(e) => handleBlur(e)}
+          value={formState.firstTeam}
+          name="firstTeam"
+          type="text"
+          placeholder="Enter first team..."
+        />
+      </Box>
+      {formState.firstTeamDirty && formState.firstTeamError && (
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
+        >
+          {formState.firstTeamError}
+        </Typography>
+      )}
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <GroupsIcon
+          sx={{
+            color: "action.active",
             mb: theme.spacing(2),
-           }} />
+          }}
+        />
         <TextField
           id="secondTeam"
           label="Second Team:"
@@ -172,25 +185,26 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           className="input"
           placeholder="Enter second team..."
         />
-        </Box>
-        {formState.secondTeamDirty && formState.secondTeamError && (
-          <Typography
-            sx={{
-              color: "red",
-              fontWeight: "bold",
-              fontFamily: "Forum",
-              fontSize: theme.spacing(2.9),
-            }}
-          >
-            {formState.secondTeamError}
-          </Typography>
-        )}
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-          <ReceiptIcon 
-          sx={{ 
-            color: "action.active", 
+      </Box>
+      {formState.secondTeamDirty && formState.secondTeamError && (
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
+        >
+          {formState.secondTeamError}
+        </Typography>
+      )}
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <ReceiptIcon
+          sx={{
+            color: "action.active",
             mb: theme.spacing(2),
-           }} />
+          }}
+        />
         <TextField
           id="numberOfTickets"
           label="Tickets:"
@@ -203,25 +217,26 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           className="input"
           placeholder="Enter the quantity of tickets..."
         />
-        </Box>
-        {formState.ticketsDirty && formState.ticketsError && (
-          <Typography
-            sx={{
-              color: "red",
-              fontWeight: "bold",
-              fontFamily: "Forum",
-              fontSize: theme.spacing(2.9),
-            }}
-          >
-            {formState.ticketsError}
-          </Typography>
-        )}
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-          <StadiumIcon 
-          sx={{ 
-            color: "action.active", 
+      </Box>
+      {formState.ticketsDirty && formState.ticketsError && (
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
+        >
+          {formState.ticketsError}
+        </Typography>
+      )}
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <StadiumIcon
+          sx={{
+            color: "action.active",
             mb: theme.spacing(2),
-           }} />
+          }}
+        />
         <TextField
           id="stadium"
           select
@@ -231,7 +246,6 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           onBlur={(e) => handleBlur(e)}
           value={formState.stadium}
           name="stadium"
-          className="input"
           placeholder="Choose Stadium..."
         >
           <MenuItem value="">
@@ -240,39 +254,38 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
           <MenuItem value={"Parc des Princes"}>Parc des Princes</MenuItem>
           <MenuItem value={"Camp Nou"}>Camp Nou</MenuItem>
         </TextField>
-        </Box>
+      </Box>
 
-        {formState.stadiumDirty && formState.stadiumError && (
-          <Typography
-            sx={{
-              color: "red",
-              fontWeight: "bold",
-              fontFamily: "Forum",
-              fontSize: theme.spacing(2.9),
-            }}
-          >
-            {formState.stadiumError}
-          </Typography>
-        )}
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-around"
-          alignItems="center"
+      {formState.stadiumDirty && formState.stadiumError && (
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
         >
-          <Button type="reset" variant="outlined" onClick={resetHandler}>
-            Reset
-          </Button>
-          <Button
-            type="button"
-            disabled={!formValid}
-            onClick={handleAddButtonClick}
-          >
-            <span className="button-content">Add</span>
-          </Button>
-        </Grid>
-      </ThemeProvider>
-    </form>
+          {formState.stadiumError}
+        </Typography>
+      )}
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        <Button type="reset" variant="outlined" onClick={resetHandler}>
+          Reset
+        </Button>
+        <Button
+          type="button"
+          disabled={!formValid}
+          onClick={handleAddButtonClick}
+        >
+          <span className="button-content">Add</span>
+        </Button>
+      </Grid>
+    </FormGroup>
   );
 };
 

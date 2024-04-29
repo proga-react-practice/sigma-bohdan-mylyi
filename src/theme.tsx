@@ -2,6 +2,16 @@ import { createTheme } from "@mui/material";
 
 
 export const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#F3F8FF",
+    },
+    secondary: {
+      main: "#000",
+      light: "#333",
+    },
+  },
+  spacing: 5,
   components: {
     MuiButton: {
       styleOverrides: {
@@ -11,6 +21,7 @@ export const theme = createTheme({
               marginTop: '20px',
               height: '26px',
               width: '100px',
+              mb: '20px',
               color: "#000",
               border: '1px solid',
               "&:hover": {
@@ -22,7 +33,7 @@ export const theme = createTheme({
     },
     MuiTextField: {
       styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
             marginBottom: '30px',
             width: '270px',
             height: '25px',
@@ -30,29 +41,19 @@ export const theme = createTheme({
             marginLeft: '10px',
             marginRight: '10px',
             '& .MuiInput-underline:before': {
-              borderBottomColor: '#000',
+              borderBottomColor: theme.palette.secondary.main,
             },
             '& .MuiInput-underline:after': {
-              borderBottomColor: '#000',
+              borderBottomColor: theme.palette.secondary.main,
             },
             '& .MuiInput-underline:hover:before': {
-              borderBottomColor: '#000',
+              borderBottomColor: theme.palette.secondary.main,
             },
-          },
+          }),
           
       },
   },
   },
-    palette: {
-      primary: {
-        main: "#F3F8FF",
-      },
-      secondary: {
-        main: "#000",
-        light: "#333"
-      },
-    },
-    spacing: 5,
   });
 
   

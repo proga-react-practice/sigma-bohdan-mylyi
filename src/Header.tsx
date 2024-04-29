@@ -39,7 +39,11 @@ const Header: React.FC = () => {
             minWidth: "450px"
           }}
         >
+<<<<<<< HEAD
           <ProgressBar />
+=======
+      <ProgressBar />
+>>>>>>> df38737 (fix some problems after review)
           <Toolbar>
             <Badge
               overlap="circular"
