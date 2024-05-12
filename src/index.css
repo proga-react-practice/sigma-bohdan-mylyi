@@ -1,7 +1,7 @@
 :root {
-  font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: "Forum", serif;
+  font-style: normal;
+  font-weight: bold;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -17,10 +17,11 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 100%;
   min-height: 100vh;
-  background-color: #F0ECE5;
-  
+  background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);
+  background-blend-mode: screen;
+  overflow-x: hidden;
 }
 
 h1 {

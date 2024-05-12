@@ -1,26 +1,10 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   font-size: 14px;
   color: #161A30;
-}
-
-.page {
-  display: flex;
-  flex-direction: row;
-  gap: 200px;
-}
-
-.container {
-  padding: 20px 15px 30px;
-  border-radius: 15px;
-  background-color: #fff;
-  box-shadow: 0 0 15px #161A30;
-  max-height: 410px;
-}
-
+} 
 .deleteCardButton:hover::before,
 .buttonReset:hover::before,
 .buttonAdd:hover::before {

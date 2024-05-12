@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from "react";
-import './component styles/Form.css';
+import "./component styles/Form.css";
+import {
+  Button,
+  Typography,
+  MenuItem,
+  Grid,
+  TextField,
+  Box,
+} from "@mui/material";
+import { theme } from "./theme";
+import GroupsIcon from "@mui/icons-material/Groups";
+import StadiumIcon from "@mui/icons-material/Stadium";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import FormGroup from "@mui/material/FormGroup";
 
 interface FormProps {
   addButtonHandler: (block: Block) => void;
@@ -32,12 +45,8 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
-    const {
-      firstTeamError,
-      secondTeamError,
-      ticketsError,
-      stadiumError,
-    } = formState;
+    const { firstTeamError, secondTeamError, ticketsError, stadiumError } =
+      formState;
     if (firstTeamError || secondTeamError || ticketsError || stadiumError) {
       setFormValid(false);
     } else {
@@ -46,7 +55,9 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   }, [formState]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     if (name === "tickets" && parseInt(value) < 0) {
@@ -67,7 +78,9 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   };
 
   const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormState((prevState) => ({
@@ -109,95 +122,172 @@ const Form: React.FC<FormProps> = ({ addButtonHandler }) => {
   };
 
   return (
-    <form className="form-container">
-      <label htmlFor="firstTeam">First Team:</label>
-      <input
-        onChange={(e) => handleInputChange(e)}
-        onBlur={(e) => handleBlur(e)}
-        value={formState.firstTeam}
-        name="firstTeam"
-        type="text"
-        className="input"
-        id="firstTeam"
-        placeholder="Enter first team..."
-        required
-      />
-      {formState.firstTeamDirty && formState.firstTeamError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px"}}>
-          {formState.firstTeamError}
-        </div>
-      )}
-      <label htmlFor="secondTeam">Second Team:</label>
-      <input
-        onChange={(e) => handleInputChange(e)}
-        onBlur={(e) => handleBlur(e)}
-        value={formState.secondTeam}
-        name="secondTeam"
-        type="text"
-        className="input"
-        id="secondTeam"
-        placeholder="Enter second team..."
-        required
-      />
-       {formState.secondTeamDirty && formState.secondTeamError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
-          {formState.secondTeamError}
-        </div>
-      )}
-      <label htmlFor="numberOfTickets">Tickets:</label>
-      <input
-        onChange={(e) => handleInputChange(e)}
-        onBlur={(e) => handleBlur(e)}
-        value={formState.tickets}
-        name="tickets"
-        type="number"
-        className="input"
-        id="numberOfTickets"
-        placeholder="Enter the quantity of tickets..."
-        required
-      />
-      {formState.ticketsDirty && formState.ticketsError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px", marginBottom: "5px"}}>
-          {formState.ticketsError}
-        </div>
-      )}
-      <label htmlFor="stadium">Stadium:</label>
-      <select
-        name="stadium"
-        id="stadium"
-        className="input input_select"
-        onChange={(e) => handleInputChange(e)}
-        onBlur={(e) => handleBlur(e)}
+    <FormGroup
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        maxHeight: '500px'
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "flex-end",
+        }}
       >
-        <option disabled>Choose Stadium:</option>
-        <option value="">None</option>
-        <option value="Parc Des Princes">Parc Des Princes</option>
-        <option value="Camp Nou">Camp Nou</option>
-      </select>
+        <GroupsIcon
+          sx={{
+            color: "action.active",
+            mb: theme.spacing(2),
+          }}
+        />
+        <TextField
+          id="firstTeam"
+          label="First Team:"
+          variant="standard"
+          onChange={(e) => handleInputChange(e)}
+          onBlur={(e) => handleBlur(e)}
+          value={formState.firstTeam}
+          name="firstTeam"
+          type="text"
+          placeholder="Enter first team..."
+        />
+      </Box>
+      {formState.firstTeamDirty && formState.firstTeamError && (
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
+        >
+          {formState.firstTeamError}
+        </Typography>
+      )}
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <GroupsIcon
+          sx={{
+            color: "action.active",
+            mb: theme.spacing(2),
+          }}
+        />
+        <TextField
+          id="secondTeam"
+          label="Second Team:"
+          variant="standard"
+          onChange={(e) => handleInputChange(e)}
+          onBlur={(e) => handleBlur(e)}
+          value={formState.secondTeam}
+          name="secondTeam"
+          type="text"
+          className="input"
+          placeholder="Enter second team..."
+        />
+      </Box>
+      {formState.secondTeamDirty && formState.secondTeamError && (
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
+        >
+          {formState.secondTeamError}
+        </Typography>
+      )}
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <ReceiptIcon
+          sx={{
+            color: "action.active",
+            mb: theme.spacing(2),
+          }}
+        />
+        <TextField
+          id="numberOfTickets"
+          label="Tickets:"
+          variant="standard"
+          onChange={(e) => handleInputChange(e)}
+          onBlur={(e) => handleBlur(e)}
+          value={formState.tickets}
+          name="tickets"
+          type="number"
+          className="input"
+          placeholder="Enter the quantity of tickets..."
+        />
+      </Box>
+      {formState.ticketsDirty && formState.ticketsError && (
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
+        >
+          {formState.ticketsError}
+        </Typography>
+      )}
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <StadiumIcon
+          sx={{
+            color: "action.active",
+            mb: theme.spacing(2),
+          }}
+        />
+        <TextField
+          id="stadium"
+          select
+          label="Stadium:"
+          variant="standard"
+          onChange={(e) => handleInputChange(e)}
+          onBlur={(e) => handleBlur(e)}
+          value={formState.stadium}
+          name="stadium"
+          placeholder="Choose Stadium..."
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"Parc des Princes"}>Parc des Princes</MenuItem>
+          <MenuItem value={"Camp Nou"}>Camp Nou</MenuItem>
+        </TextField>
+      </Box>
+
       {formState.stadiumDirty && formState.stadiumError && (
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "12px",marginBottom: "5px"}}>
+        <Typography
+          sx={{
+            color: theme.palette.error.light,
+            fontWeight: "bold",
+            fontFamily: "Forum",
+            fontSize: theme.spacing(2.9),
+          }}
+        >
           {formState.stadiumError}
-          </div>
-  )}
-  <div className="buttons">
-    <button
-      type="reset"
-      className="buttonReset"
-      onClick={resetHandler}
-    >
-      <span className="button-content">Reset</span>
-    </button>
-    <button
-      type="button"
-      className="buttonAdd"
-      disabled={!formValid}
-      onClick={handleAddButtonClick}
-    >
-      <span className="button-content">Add</span>
-    </button>
-  </div>
-</form>
-);
+        </Typography>
+      )}
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        <Button type="reset" variant="outlined" onClick={resetHandler}>
+          Reset
+        </Button>
+        <Button
+          type="button"
+          disabled={!formValid}
+          onClick={handleAddButtonClick}
+        >
+          <span className="button-content">Add</span>
+        </Button>
+      </Grid>
+    </FormGroup>
+  );
 };
 
 export default Form;

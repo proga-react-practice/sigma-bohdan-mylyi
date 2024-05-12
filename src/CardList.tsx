@@ -1,5 +1,12 @@
 import React from "react";
-import './component styles/CardList.css'
+import "./component styles/CardList.css";
+import {
+  Button,
+  Typography,
+  Box,
+  Grid,
+} from "@mui/material";
+import { theme } from './theme'
 
 interface Block {
   id: number;
@@ -16,26 +23,82 @@ interface CardListProps {
 
 const CardList: React.FC<CardListProps> = ({ blocks, removeBlock }) => {
   return (
-    <div className="cardList">
-      {blocks.map((block) => (
-        <div key={block.id} className="card">
-          <h2 className="cardTitle">Match Info:</h2>
-          <label className="cardLabel">
-            {block.firstTeam} - {block.secondTeam}
-          </label>
-          <label className="cardLabel">
-            Number of tickets - "{block.tickets}"
-          </label>
-          <label className="cardLabel">Field - "{block.stadium}"</label>
-          <button
-            onClick={() => removeBlock(block.id)}
-            className="deleteCardButton"
+      <Box
+        sx={{mt: theme.spacing(20),
+          "@media screen and (max-width: 770px)": {
+            ml: 'auto',
+            mr: 'auto',
+            mt: theme.spacing(5),
+          },
+        }}
+      >
+        {blocks.map((block) => (
+          <Grid
+            key={block.id}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              borderRadius: theme.spacing(6),
+              width: theme.spacing(70),
+              backgroundColor: "primary.main",
+              boxShadow: 5,
+              marginTop: theme.spacing(2),
+              "@media screen and (max-width: 426px)": {
+                width: theme.spacing(40),
+              },
+            }}
           >
-            <span className="button-content">Delete</span>
-          </button>
-        </div>
-      ))}
-    </div>
+            <Typography
+              sx={{
+                marginTop: theme.spacing(3),
+                fontSize: theme.spacing(4),
+                fontFamily: "Platypi",
+                fontWeight: 600,
+              }}
+            >
+              Match Info:
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Platypi",
+                fontSize: theme.spacing(3),
+                marginTop: theme.spacing(2),
+              }}
+            >
+              {block.firstTeam} - {block.secondTeam}
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Platypi",
+                fontSize: theme.spacing(3),
+                marginTop: theme.spacing(2),
+              }}
+            >
+              Number of tickets - "{block.tickets}"
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Platypi",
+                fontSize: theme.spacing(3),
+                marginTop: theme.spacing(2),
+              }}
+            >
+              Field - "{block.stadium}"
+            </Typography>
+            <Button
+              onClick={() => removeBlock(block.id)}
+              sx={{
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: theme.spacing(3),
+                marginBottom: theme.spacing(3)
+              }}
+            >
+              Delete
+            </Button>
+          </Grid>
+        ))}
+      </Box>
   );
 };
 
